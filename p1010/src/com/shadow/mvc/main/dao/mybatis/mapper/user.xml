@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shadow.mvc.main.dao.mybatis.UserDao">
+	<resultMap type="User" id="User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<collection column="id" property="groups" javaType="ArrayList" select="queryGroups" />
+	</resultMap>
+	
+	<resultMap type="Group" id="Group">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="expound" property="expound" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="queryByUserName" parameterType="String" resultMap="User">
+		select t1.* from t_user t1 where t1.username = #{_parameter}
+    </select>
+	
+	<select id="queryById" parameterType="int" resultMap="User">
+		select t1.* from t_user t1 where t1.id = #{_parameter}
+	</select>
+
+	<select id="queryGroups" parameterType="User" resultMap="com.shadow.mvc.main.dao.mybatis.GroupDao.Group">
+		select t1.* from t_group t1, t_group_user t2 where t1.id = t2.groupid and t2.userid = #{id}
+	</select>
+	
+	<insert id="insertGroupRelation" parameterType="User">
+		insert into t_group_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		   <if test="level != null">groupid,</if>
+		   <if test="id != null">userid,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		   <if test="level != null">#{level,jdbcType=INTEGER},</if>
+		   <if test="id != null">#{id,jdbcType=INTEGER},</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertRelation" parameterType="User">
+		insert into t_user_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		   <if test="id != null">userid,</if>
+		   <if test="level != null">roleid,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		   <if test="id != null">#{id,jdbcType=INTEGER},</if>
+		   <if test="level != null">#{level,jdbcType=INTEGER},</if>
+		</trim>
+	</insert>
+	
+	<insert id="insert" parameterType="User">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id"> 
+        	select last_insert_rowid() as id
+        </selectKey>
+		insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		   <if test="id != null">id,</if>
+		   <if test="username != null">username,</if>
+		   <if test="password != null">password,</if>
+		   <if test="name != null">name,</if>
+		   <if test="level != null">level,</if>
+		   <if test="status != null">status,</if>
+		   <if test="phone != null">phone,</if>
+		   <if test="email != null">email,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		   <if test="id != null">#{id,jdbcType=INTEGER},</if>
+		   <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+		   <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+		   <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+		   <if test="level != null">#{level,jdbcType=INTEGER},</if>
+		   <if test="status != null">#{status,jdbcType=INTEGER},</if>
+		   <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
+		   <if test="email != null">#{email,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="User">
+		update t_user
+		<set>
+			<if test="username != null">username = #{username,jdbcType=VARCHAR},</if>
+			<if test="password != null">password = #{password,jdbcType=VARCHAR},</if>
+			<if test="name != null">name = #{name,jdbcType=VARCHAR},</if>
+			<if test="level != null">level = #{level,jdbcType=INTEGER},</if>
+			<if test="status != null">status = #{status,jdbcType=INTEGER},</if>
+			<if test="phone != null">phone = #{phone,jdbcType=VARCHAR},</if>
+			<if test="email != null">email = #{email,jdbcType=VARCHAR},</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="checkUser" parameterType="String" resultType="int">
+		select count(1) from t_user where username = #{_parameter}
+	</select>
+
+	<select id="queryForPageTotal" parameterType="Map" resultType="int">
+		select count(1) from t_user where level &gt; #{level}
+	</select>
+
+	<select id="queryForPageList" parameterType="Map" resultMap="User">
+		select * from t_user where level &gt; #{level} order by level desc limit #{offset}, #{limit}
+	</select>
+	
+	<select id="queryForPageTotalSearch" parameterType="Map" resultType="int">
+		select count(1) from t_user where 1 = 1
+		<if test="name != null and name != ''">and name like '%${name}%'</if>
+		<if test="username != null and username != ''">and username  like '%${username}%'</if>
+		<if test="level != null and level != ''">and level = #{level}</if>
+	</select>
+
+	<select id="queryForPageListSearch" parameterType="Map" resultMap="User">
+		select * from t_user where 1 = 1
+		<if test="name != null and name != ''">and name like '%${name}%'</if>
+		<if test="username != null and username != ''">and username  like '%${username}%'</if>
+		<if test="level != null and level != ''">and level = #{level}</if>
+		order by level desc limit #{offset}, #{limit}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		delete from t_user where id = #{_parameter}
+	</delete>
+
+	<delete id="deleteForBatch" parameterType="List">
+		delete from t_user where
+		<foreach collection="list" item="item" index="index" separator="or">id = #{item}</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,9 @@
+本文只适用于win32系统
+
+1.随便把memcached文件夹放到一个目录下,如:C:\Program Files\memcached
+
+2.打开cmd命令窗口,进入到这个目录,cd C:\Program Files\memcached
+
+3.输入命令:memcached -u administator -d install
+
+4.打开管理工具->服务->右键启动memeached的服务(可调成开机自动启动)

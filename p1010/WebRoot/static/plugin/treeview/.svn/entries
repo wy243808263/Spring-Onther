@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="186"
+   name=""
+   committed-date="2012-12-28T07:32:17.263347Z"
+   url="http://queenstyle.gnway.net:8004/svn/share/sd_meal_view/WebRoot/plugin/treeview"
+   last-author="root"
+   kind="dir"
+   repos="http://queenstyle.gnway.net:8004/svn/share"
+   revision="186"/>
+<entry
+   name="shoparea"
+   kind="dir"/>
+<entry
+   name="demo"
+   kind="dir"/>
+<entry
+   name="images"
+   kind="dir"/>
+<entry
+   name="lib"
+   kind="dir"/>
+<entry
+   name="area"
+   kind="dir"/>
+<entry
+   name="css"
+   kind="dir"/>
+<entry
+   name="category"
+   kind="dir"/>
+</wc-entries>

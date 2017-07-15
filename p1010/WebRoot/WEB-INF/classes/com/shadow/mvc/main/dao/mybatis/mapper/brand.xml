@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shadow.mvc.main.dao.mybatis.BrandDao">
+	<resultMap type="Brand" id="Brand">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="queryById" parameterType="int" resultMap="Brand">
+		select t1.* from t_Brand t1 where t1.id = #{_parameter}
+	</select>
+
+	<insert id="insert" parameterType="Brand">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id"> 
+        	select last_insert_rowid() as id
+        </selectKey>
+		insert into t_Brand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		   <if test="id != null">id,</if>
+		   <if test="name != null">name,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		   <if test="id != null">#{id,jdbcType=INTEGER},</if>
+		   <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="Brand">
+		update t_Brand
+		<set>
+			<if test="name != null">name = #{name,jdbcType=VARCHAR},</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="queryForAll" parameterType="Map" resultMap="Brand">
+		select t1.* from t_Brand t1
+    </select>
+
+	<select id="queryForPageTotal" parameterType="Map" resultType="int">
+		select count(1) from t_Brand
+	</select>
+
+	<select id="queryForPageList" parameterType="Map" resultMap="Brand">
+		select * from t_Brand limit #{offset}, #{limit}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		delete from t_Brand where id = #{_parameter}
+	</delete>
+
+	<delete id="deleteForBatch" parameterType="List">
+		delete from t_Brand where
+		<foreach collection="list" item="item" index="index" separator="or">id = #{item}</foreach>
+	</delete>
+</mapper>

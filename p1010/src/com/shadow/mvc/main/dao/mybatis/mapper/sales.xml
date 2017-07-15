@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shadow.mvc.main.dao.mybatis.SalesDao">
+
+	<resultMap type="Sales" id="Sales">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="mold" property="mold" jdbcType="INTEGER" />
+		<result column="expound" property="expound" jdbcType="VARCHAR" />
+		<result column="establish" property="establish" jdbcType="TIMESTAMP" />
+		<result column="amount" property="amount" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		<association column="userid" property="user" select="com.shadow.mvc.main.dao.mybatis.UserDao.queryById" />
+		<association column="goodsid" property="goods" select="com.shadow.mvc.main.dao.mybatis.GoodsDao.queryById" />
+	</resultMap>
+
+	<select id="queryById" parameterType="int" resultMap="Sales">
+		select t1.* from t_Sales t1 where t1.id = #{_parameter}
+	</select>
+
+	<insert id="insert" parameterType="Sales">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id"> 
+        	select last_insert_rowid() as id
+        </selectKey>
+		insert into t_Sales
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		   <if test="id != null">id,</if>
+		   <if test="mold != null">mold,</if>
+		   <if test="expound != null">expound,</if>
+		   <if test="establish != null">establish,</if>
+		   <if test="amount != null">amount,</if>
+		   <if test="price != null">price,</if>
+		   <if test="user != null">userid,</if>
+		   <if test="goods != null">goodsid,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		   <if test="id != null">#{id,jdbcType=INTEGER},</if>
+		   <if test="mold != null">#{mold,jdbcType=INTEGER},</if>
+		   <if test="expound != null">#{expound,jdbcType=VARCHAR},</if>
+		   <if test="establish != null">#{establish,jdbcType=TIMESTAMP},</if>
+		   <if test="amount != null">#{amount,jdbcType=INTEGER},</if>
+		   <if test="price != null">#{price,jdbcType=VARCHAR},</if>
+		   <if test="user != null">#{user.id,jdbcType=INTEGER},</if>
+		   <if test="goods != null">#{goods.id,jdbcType=INTEGER},</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="Sales">
+		update t_Sales
+		<set>
+			<if test="mold != null">mold = #{mold,jdbcType=INTEGER},</if>
+			<if test="expound != null">expound = #{expound,jdbcType=VARCHAR},</if>
+			<if test="establish != null">establish = #{establish,jdbcType=TIMESTAMP},</if>
+			<if test="amount != null">amount = #{amount,jdbcType=INTEGER},</if>
+			<if test="price != null">price = #{price,jdbcType=VARCHAR},</if>
+			<if test="user != null">userid = #{user.id,jdbcType=INTEGER},</if>
+			<if test="goods != null">goodsid = #{goods.id,jdbcType=INTEGER},</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="queryForAll" parameterType="Map" resultMap="Sales">
+		select t1.* from t_Sales t1
+    </select>
+    
+	<select id="queryForPageTotal" parameterType="Map" resultType="int">
+		select count(1) from t_sales a inner join t_goods b on a.goodsid = b.id where 1 = 1 
+		<if test="mold != null and mold !=''">and a.mold = #{mold}</if>
+		<if test="brand != null and brand !=''">and b.brandid = #{brand}</if>
+		<if test="items != null and items !=''">and b.itemsid = #{items}</if>
+		<if test="goods != null and goods !=''">and b.id = #{goods}</if>
+		<if test="start != null and start != ''">and a.establish &gt; #{start}</if>
+		<if test="ends != null and ends != ''">and a.establish &lt; #{ends}</if>
+	</select>
+
+	<select id="queryForPageList" parameterType="Map" resultMap="Sales">
+		select a.* from t_sales a inner join t_goods b on a.goodsid = b.id where 1 = 1 
+		<if test="mold != null and mold !=''">and a.mold = #{mold}</if>
+		<if test="brand != null and brand !=''">and b.brandid = #{brand}</if>
+		<if test="items != null and items !=''">and b.itemsid = #{items}</if>
+		<if test="goods != null and goods !=''">and b.id = #{goods}</if>
+		<if test="start != null and start != ''">and a.establish &gt; #{start}</if>
+		<if test="ends != null and ends != ''">and a.establish &lt; #{ends}</if>
+		order by a.id desc limit #{offset}, #{limit}
+	</select>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_Sales where id = #{_parameter}
+	</delete>
+
+	<delete id="deleteForBatch" parameterType="List">
+		delete from t_Sales where
+		<foreach collection="list" item="item" index="index" separator="or">id = #{item}</foreach>
+	</delete>
+</mapper>

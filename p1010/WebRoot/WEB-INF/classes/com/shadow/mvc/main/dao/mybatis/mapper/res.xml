@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shadow.mvc.main.dao.mybatis.ResDao">
+	<resultMap type="Res" id="Res">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="mold" property="mold" jdbcType="VARCHAR" />
+		<result column="uri" property="uri" jdbcType="VARCHAR" />
+		<result column="expound" property="expound" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<collection property="roles" column="id" javaType="ArrayList"
+			select="queryRoles" />
+	</resultMap>
+	
+	<resultMap type="Role" id="Role">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="expound" property="expound" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="queryRoles" parameterType="Res" resultMap="Role">
+		select t1.* from t_role t1, t_role_res t2 where t1.id = t2.roleid and t2.resid = #{id}
+	</select>
+
+	<select id="queryById" parameterType="int" resultMap="Res">
+		select t1.* from t_res t1 where t1.id = #{_parameter}
+	</select>
+
+	<insert id="insert" parameterType="Res">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id"> 
+        	select last_insert_rowid() as id
+        </selectKey>
+		insert into t_res
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		   <if test="id != null">id,</if>
+		   <if test="mold != null">mold,</if>
+		   <if test="uri != null">uri,</if>
+		   <if test="expound != null">expound,</if>
+		   <if test="status != null">status,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		   <if test="id != null">#{id,jdbcType=INTEGER},</if>
+		   <if test="mold != null">#{mold,jdbcType=VARCHAR},</if>
+		   <if test="uri != null">#{uri,jdbcType=VARCHAR},</if>
+		   <if test="expound != null">#{expound,jdbcType=VARCHAR},</if>
+		   <if test="status != null">#{status,jdbcType=INTEGER},</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="Res">
+		update t_res
+		<set>
+			<if test="mold != null">mold = #{mold,jdbcType=VARCHAR},</if>
+			<if test="uri != null">uri = #{uri,jdbcType=VARCHAR},</if>
+			<if test="expound != null">expound = #{expound,jdbcType=VARCHAR},</if>
+			<if test="status != null">status = #{status,jdbcType=INTEGER},</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="queryForAll" parameterType="Map" resultMap="Res">
+		select t1.* from t_res t1
+    </select>
+
+	<select id="queryForPageTotal" parameterType="Map" resultType="int">
+		select count(1) from t_res
+	</select>
+
+	<select id="queryForPageList" parameterType="Map" resultMap="Res">
+		select * from t_res order by mold limit #{offset}, #{limit}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		delete from t_res where id = #{_parameter}
+	</delete>
+
+	<delete id="deleteForBatch" parameterType="List">
+		delete from t_res where
+		<foreach collection="list" item="item" index="index" separator="or">id = #{item}</foreach>
+	</delete>
+	
+	<select id="queryByRoles" parameterType="List" resultMap="Res">
+		select * from t_res where id in 
+		(
+		select resid from t_role_res where 
+		<foreach collection="list" item="item" index="index" separator="or">roleid = #{item}</foreach>
+		)
+	</select>
+	
+	<select id="queryAllotRes" parameterType="Map" resultMap="Res">
+		<if test="mold == 1">
+			select * from t_res where id in (select resid from t_role_res where roleid = #{role})
+		</if>
+		<if test="mold == 2">
+			select * from t_res where id not in (select resid from t_role_res where roleid = #{role})
+		</if>
+	</select>
+	
+	<insert id="insertRelate" parameterType="Map">
+		insert into t_role_res(roleid, resid) values(#{role}, #{res});
+	</insert>
+	
+	<delete id="deleteRelate" parameterType="Map">
+		delete from t_role_res where roleid = #{role} and resid = #{res}
+	</delete>
+	
+	<select id="checkIsExist" parameterType="Res" resultType="int">
+		select count(1) from t_res where uri = #{uri}
+    </select>
+</mapper>

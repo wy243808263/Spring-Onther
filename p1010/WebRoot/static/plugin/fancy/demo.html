@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>demo page</title>
+<link href="demo.css" rel="stylesheet" type="text/css" />
+<script src="jquery-1.6.min.js" type="text/javascript"></script>
+<script src="jqFancyTransitions.1.8.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#ft').jqFancyTransitions({width:450,height:221,titleOpacity: 0.0});
+	});
+</script>
+</head>
+<body>
+<!--
+	01	effect: '', // wave, zipper, curtain
+	02	width: 500, // width of panel
+	03	height: 332, // height of panel
+	04	strips: 20, // number of strips
+	05	delay: 5000, // delay between images in ms
+	06	stripDelay: 50, // delay beetwen strips in ms
+	07	titleOpacity: 0.7, // opacity of title
+	08	titleSpeed: 1000, // speed of title appereance in ms
+	09	position: 'alternate', // top, bottom, alternate, curtain
+	10	direction: 'fountainAlternate', // left, right, alternate, random, fountain, fountainAlternate
+	11	navigation: false, // prev and next navigation buttons
+	12	links: false // show images as links
+-->
+<div id="ftHolder">
+
+	<div id="ft">
+		<a href="#"><img src="1.jpg" 
+			 alt="<i>Terrace View <a href='http://sniperyu.deviantart.com/'>by Marko Manojlovic</a></i>" /></a>
+		<a href='http://sniperyu.deviantart.com/'></a>
+		<img src="2.jpg" 
+			 alt="NBG #1 <i><a href='http://picasaweb.google.com/azzazel'>by Goran Jovanovic</a></i>" />
+		<a href='http://picasaweb.google.com/azzazel'></a>
+		<img src="3.jpg" 
+			 alt="Navagio beach Zakynthos <i><a href='http://ivframes.com/'>by Ivan Jekic</a></i>" />
+		<a href='http://ivframes.com/'></a>			 
+		<img src="4.jpg" 
+			 alt="Blue Window <i><a href='http://www.igorsrdanovic.com'>by Igor Srdanovic</a></i>" />
+
+		<a href='http://ivframes.com/'></a>			 
+		<img src="5.jpg" 
+			 alt="Blue Window <i><a href='http://www.igorsrdanovic.com'>by Igor Srdanovic</a></i>" />
+		
+		</div>
+	
+</div>
+</body>
+</html>

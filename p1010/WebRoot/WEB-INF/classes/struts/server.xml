@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="server" namespace="/server" extends="main">
+		<!-- 主页跳转 -->
+		<action name="index" class="userAction" method="welcome">
+			<interceptor-ref name="baseStack" />
+			<result name="welcome">/dynamic/server/view/welcome.jsp</result>
+		</action>
+		<action name="own" class="userAction">
+			<interceptor-ref name="baseStack" />
+			<result name="info_own">/dynamic/server/own/info_own.jsp</result>
+		</action>
+
+		<!-- 分组模块 -->
+		<action name="group" class="groupAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/group/page_list.jsp
+			</result>
+			<result name="findById">/dynamic/server/group/edit.jsp</result>
+			<result name="findByIdForAllot">/dynamic/server/group/allot.jsp</result>
+		</action>
+
+		<!-- 角色模块 -->
+		<action name="role" class="roleAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/role/page_list.jsp
+			</result>
+			<result name="findById">/dynamic/server/role/edit.jsp</result>
+			<result name="findByIdForAllot">/dynamic/server/role/allot.jsp</result>
+		</action>
+
+		<!-- 资源模块 -->
+		<action name="res" class="resAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/res/page_list.jsp
+			</result>
+			<result name="findById">/dynamic/server/res/edit.jsp
+			</result>
+		</action>
+
+		<!-- 用户模块 -->
+		<action name="user" class="userAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/user/page_list.jsp</result>
+			<result name="findById">/dynamic/server/user/edit.jsp</result>
+			<result name="findByIdForAllot">/dynamic/server/user/allot.jsp</result>
+		</action>
+
+		<!-- 品牌模块 -->
+		<action name="brand" class="brandAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/brand/page_list.jsp</result>
+			<result name="findById">/dynamic/server/brand/edit.jsp</result>
+		</action>
+
+		<!-- 商品模块 -->
+		<action name="goods" class="goodsAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/goods/page_list.jsp</result>
+			<result name="findById">/dynamic/server/goods/edit.jsp</result>
+		</action>
+
+		<!-- 分类模块 -->
+		<action name="items" class="itemsAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/items/page_list.jsp</result>
+			<result name="findById">/dynamic/server/items/edit.jsp</result>
+		</action>
+
+		<!-- 存销信息模块 -->
+		<action name="sales" class="salesAction">
+			<interceptor-ref name="baseStack" />
+			<result name="page">/dynamic/server/sales/page_list.jsp</result>
+			<result name="findById">/dynamic/server/sales/edit.jsp</result>
+		</action>
+
+		<!-- 下载模块 -->
+		<action name="down" class="downAction">
+			<result name="success" type="stream">
+				<!-- 指定下载文件的内容类型，text/plain是默认类型 -->
+				<param name="contentType">text/plain</param>
+				<!--
+					inputName默认值是inputStream，如果action中用于读取下载文件内容的属性名是inputStream，那么可以省略这个参数
+				-->
+				<param name="inputName">inputStream</param>
+				<!--动态获取文件名，从Action中的取得filename-->
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+			</result>
+		</action>
+	</package>
+</struts>

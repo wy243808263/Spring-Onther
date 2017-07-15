@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="186"
+   name=""
+   committed-date="2012-12-28T07:32:17.263347Z"
+   url="http://queenstyle.gnway.net:8004/svn/share/sd_meal_view/WebRoot/plugin/treeview/area"
+   last-author="root"
+   kind="dir"
+   repos="http://queenstyle.gnway.net:8004/svn/share"
+   revision="186"/>
+<entry
+   committed-rev="186"
+   name="area.js"
+   text-time="2012-12-26T08:40:56.828000Z"
+   committed-date="2012-12-28T07:32:17.263347Z"
+   checksum="00091d51c4e88fd98a42c655ffa95c20"
+   last-author="root"
+   kind="file"/>
+</wc-entries>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 接口全类名 -->
+<mapper namespace="com.cangyue.kyle.mybatipse.mapper.Usermybatipse">
+<!-- 映射文件名必须要跟接口名字一样 -->
+	<insert id="add" parameterType="com.cangyue.kyle.mybatipse.po.User">
+		insert into user(name,age) values(#{name},#{age})
+	</insert>
+	
+	<select id="get" parameterType="int" resultType="com.cangyue.kyle.mybatipse.po.User">
+		select * from user where id=#{id}
+	</select>
+	
+</mapper>

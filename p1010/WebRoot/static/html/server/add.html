@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文档管理</title>
+<link rel="stylesheet" type="text/css" href="/p1001/static/skin/server/css/base.css">
+<link rel="stylesheet" type="text/css" href="css/validate.css" />
+	
+<script src="core.js" type="text/javascript"></script>
+<script src="js/validate.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+		$(function(){
+			jQuery('#head').load("head.html?a=1");
+		});
+			
+		function confirmpwd() {
+
+	        p1 = jQuery('#password').val();
+	
+	        p2 = jQuery('#confirm_password').val();
+	
+	        if (p1 != p2) {
+	
+	            setTimeout(function() {
+	
+	                jQuery('#confirm_password').val('');
+	
+	                jQuery('#tip_confirm_password').removeClass('validation-valid');
+	
+	                jQuery('#tip_confirm_password').addClass('validation-error');
+	
+	                jQuery('#tip_confirm_password').html('密码与确认密码输入不一致，请重新输入');
+	
+	            }, 10)
+	
+	        }
+	
+	    }
+		
+	</script>
+
+</head>
+<body leftmargin="8" topmargin="8" background='/p1001/static/skin/server/images/allbg.gif'>
+
+<!-- head -->
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><div style='float:left'> <img height="14" src="/p1001/static/skin/server/images/frame/book1.gif" width="20" />&nbsp;欢迎使用内容管理系统，建站的首选工具。 </div>
+      <div style='float:right;padding-right:8px;'>
+        <!--  //保留接口  -->
+      </div></td>
+  </tr>
+  <tr>
+    <td height="1" background="/p1001/static/skin/server/images/frame/sp_bg.gif" style='padding:0px'></td>
+  </tr>
+</table>
+<table width="98%" align="center" border="0" cellpadding="3" cellspacing="1" bgcolor="#CBD8AC" style="margin-bottom:8px;margin-top:0px;">
+</table>
+
+<!--  快速转换位置按钮  -->
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
+<tr>
+ <td height="26" background="/p1001/static/skin/server/images/newlinebg3.gif">
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="center">
+    <input type='button' class="coolbg np" onClick="location='';" value='添加文档' />
+    <input type='button' class="coolbg np" onClick="location='';" value='我的文档' />
+    <input type='button' class='coolbg np' onClick="location='';" value='稿件审核' />
+    <input type='button' class="coolbg np" onClick="location='';" value='栏目管理' />
+    <input type='button' class="coolbg np" onClick="location='';" value='更新列表' />
+    <input type='button' class="coolbg np" onClick="location='';" value='更新文档' />
+    <input type='button' class="coolbg np" onClick="location='';" value='文章回收站' />
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!--  内容列表   -->
+<form id="form1">
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7">
+	<td height="24" colspan="10" background="/p1001/static/skin/server/images/tbg.gif">&nbsp;添加文档&nbsp;</td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1">
+	<td width="150">账号:</td>
+	<td width="300"><input type="text" id="username" style="width:150px;" />&nbsp;<label class="lb_rq">*</label></td>
+	<td align="left"><div id="tip_username"></div></td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1">
+	<td>密码:</td><td><input type="password" id="password" style="width:150px;" />&nbsp;<label class="lb_rq">*</label></td>
+	<td align="left"><div id="tip_password"></div></td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1">
+	<td>重复:</td><td><input type="password" id="confirm_password" style="width:150px;" onblur="confirmpwd()" />&nbsp;<label class="lb_rq">*</label></td>
+	<td align="left"><div id="tip_confirm_password"></div></td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1">
+	<td>邮箱:</td><td><input type="text" id="email" style="width:150px;" />&nbsp;<label class="lb_rq">*</label></td>
+	<td align="left"><div id="tip_email"></div></td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1">
+	<td>手机:</td><td><input type="text" id="phone" style="width:150px;" />&nbsp;<label class="lb_rq">*</label></td>
+	<td align="left"><div id="tip_phone"></div></td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1">
+	<td colspan="3" align="left"><div style="margin-left:250px;">
+		<input type='button' class="coolbg np" value='提交' />&nbsp;<input type='reset' class="coolbg np" value='重置' /></div>
+	</td>
+</tr>
+</table>
+</form>
+</body>
+</html>

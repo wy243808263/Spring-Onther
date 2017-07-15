@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/invoicemanager/!svn/ver/22/trunk/src
+END
+spring-mvc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/invoicemanager/!svn/ver/2/trunk/src/spring-mvc.xml
+END
+jdbc.properties
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/invoicemanager/!svn/ver/39/trunk/src/jdbc.properties
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/invoicemanager/!svn/ver/2/trunk/src/log4j.properties
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/invoicemanager/!svn/ver/2/trunk/src/applicationContext.xml
+END
+spring-mybatis.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/invoicemanager/!svn/ver/2/trunk/src/spring-mybatis.xml
+END

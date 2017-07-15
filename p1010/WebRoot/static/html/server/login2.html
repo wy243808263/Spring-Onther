@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>登录界面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	
+	<!-- Skin Style -->
+	<link rel="stylesheet" type="text/css" href="/static/skin/server/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="/static/plugin/validator/cmxform.css" />
+	
+	<!-- JavaScript -->
+	<script src="/static/plugin/jquery/core.js" type="text/javascript"></script>
+	<script src="/static/skin/server/js/base.js" type="text/javascript"></script>
+	<script src="/static/plugin/validator/core.js" type="text/javascript"></script>
+  	<script src="/static/skin/server/js/login.js" type="text/javascript"></script>
+  	<noscript>
+		<style>
+			#bg{display:none;}
+		</style>
+		友情提示: 对不起,由于您当前的浏览器尚未开启JavaScript脚本的支持导致页面无法加载!
+	</noscript>
+  </head>
+  <body>
+<div style="background-color:#ffffff" id="bg">
+<div id="container">
+	<table width="1162" height="803" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <td width="289" height="628"><div id="bg_01"></div></td>
+	    <td width="260" height="628"><div id="bg_02"></div></td>
+	    <td width="613" height="628"><div id="bg_03"></div>
+			<div id="bg_04">
+			<div id="form">
+			<div id="descr"><label>欢迎使用我们的商业管理系统</label></div>
+			<div id="content">
+			<!-- 登录表单 -->
+			<form method="post" id="submitForm">
+			<table>
+				<tr>
+					<td><label class="text-label">账号:</label></td>
+					<td><input type='text' name='username' id="username" maxlength="13" style="width:150px;" class="{required:true}" /></td>
+				</tr>
+				<tr>
+					<td><label class="text-label">密码:</label></td>
+					<td><input type='password' name='password' id="password" maxlength="13" style="width:150px;" class="{required:true}" /></td>
+				</tr>
+				<tr>
+					<td><label class="text-label">验证:</label></td>
+					<td><input type='text' name='validateCode' id="validateCode" maxlength="4" style="width:150px;" class="{required:true}" /></td>
+				</tr>
+				<tr>
+					<td><label class="text-label">模式:</label></td>
+					<td>
+						<select id="remember" name="rememberMe" class="text-select">
+							<option>不必记住密码</option>
+							<option value="true">两周内自动登录</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="text-label">校验:</label></td>
+					<td id="img_container"><a href="#" onclick="load_validateCode();return false;">获取验证码</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" id="submitBtn" class="coolbg np" onclick="submitForm();">提交</button>&nbsp;<button id="resetBtn" type="reset" class="coolbg np">重置</button>
+					</td>
+				</tr>
+			</table>
+			</form>
+			</div>
+			</div>
+			</div></td>
+	  </tr>
+	  <tr>
+	    <td colspan="3" width="1162" height="175" ><div id="bg_05"></div></td>
+	    </tr>
+	</table>
+</div>
+</body>
+</html>

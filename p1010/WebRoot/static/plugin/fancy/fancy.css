@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+/*--- fancy start */
+.ft-title { padding: 10px 10px; width: 530px; text-align: left; }
+.ft-title a { text-decoration: none;}
+.ft-title a:hover { text-decoration: underline; }
+.ft-prev, .ft-next { background-color: #999999; padding: 0 10px; color:#666666;text-decoration: none;}
+.ft-prev:hover, .ft-next:hover {color:#E71810;text-decoration: underline;}
+.ft-button-ft{color:#757E82;text-decoration: none;}
+.ft-button-ft:hover{color:#E71810;text-decoration: none;}
+.ft-button-ft-active {color:#E71810;text-decoration: underline;}
+/*--- fancy end */

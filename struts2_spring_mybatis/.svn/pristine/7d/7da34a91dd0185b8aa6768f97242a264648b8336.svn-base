@@ -1,0 +1,36 @@
+package com.cangyue.kyle.Action;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.cangyue.kyle.mybatipse.mapper.Usermybatipse;
+import com.cangyue.kyle.mybatipse.po.User;
+import com.opensymphony.xwork2.ActionSupport;
+
+@Controller
+public class Action extends ActionSupport{
+
+	@Autowired
+	private Usermybatipse usermybatipse;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4108915843413766146L;
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String test(){
+		User user=usermybatipse.get(1);
+		System.out.println(user.toString());
+		System.out.println(" ‰≥ˆ≤‚ ‘:"+name);
+		return "test";
+	}
+	
+}
